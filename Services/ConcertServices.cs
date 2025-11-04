@@ -34,7 +34,29 @@ namespace ConcertTicketing.Services
         // Update data konser
         public void Update(Concert concert)
         {
-            _context.Concerts.Update(concert);
+            // 1. Ambil ID dari objek yang dikirim
+            int id = concert.Id;
+
+            // 2. Cari objek yang sudah ada di database (ini akan otomatis dilacak)
+            var concertToUpdate = _context.Concerts.Find(id);
+
+            if (concertToUpdate == null)
+            {
+                // Penanganan jika entitas tidak ditemukan
+                throw new KeyNotFoundException($"Konser dengan ID {id} tidak ditemukan.");
+            }
+
+            // 3. Modifikasi properti pada objek yang SUDAH DILACAK 
+            //    menggunakan data dari objek 'concert' yang dikirim dari form
+            concertToUpdate.ConcertName = concert.ConcertName;
+            concertToUpdate.Performer = concert.Performer;
+            concertToUpdate.Venue = concert.Venue;
+            concertToUpdate.ConcertDate = concert.ConcertDate;
+            concertToUpdate.TicketPrice = concert.TicketPrice;
+            concertToUpdate.Capacity = concert.Capacity;
+
+            // 4. Simpan perubahan. EF Core secara otomatis mendeteksi properti yang berubah, 
+            //    tanpa perlu memanggil .Update()
             _context.SaveChanges();
         }
 

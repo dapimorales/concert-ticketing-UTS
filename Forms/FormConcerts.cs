@@ -86,12 +86,18 @@ namespace concert_ticketing.Forms
         {
             try
             {
+                var parsedDate = DateTime.ParseExact(
+                    txtDate.Text,
+                    "dd/MM/yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture
+                );
+
                 var concert = new Concert
                 {
                     ConcertName = txtConcertName.Text.Trim(),
                     Performer = txtPerformer.Text.Trim(),
                     Venue = txtVenue.Text.Trim(),
-                    ConcertDate = DateTime.Parse(txtDate.Text),
+                    ConcertDate = DateTime.SpecifyKind(parsedDate, DateTimeKind.Utc),
                     TicketPrice = decimal.Parse(txtPrice.Text),
                     Capacity = int.Parse(txtCapacity.Text)
                 };
@@ -103,9 +109,12 @@ namespace concert_ticketing.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Gagal menambah konser: " + ex.Message);
+                MessageBox.Show("Gagal menambah konser: " +
+                    (ex.InnerException?.Message ?? ex.Message));
             }
         }
+
+
 
         // Update konser
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -118,6 +127,7 @@ namespace concert_ticketing.Forms
 
             try
             {
+                // Membuat objek BARU yang berisi data form (ini OK, karena Service akan me-replace datanya)
                 var concert = new Concert
                 {
                     Id = selectedConcertId.Value,
@@ -129,10 +139,16 @@ namespace concert_ticketing.Forms
                     Capacity = int.Parse(txtCapacity.Text)
                 };
 
+                // Memanggil service. Service akan menemukan entitas lama dan meng-overwrite propertinya.
                 _concertService.Update(concert);
+
                 MessageBox.Show("Data konser berhasil diperbarui!");
                 LoadConcerts();
                 ClearForm();
+            }
+            catch (KeyNotFoundException knfe)
+            {
+                MessageBox.Show("Error: " + knfe.Message);
             }
             catch (Exception ex)
             {

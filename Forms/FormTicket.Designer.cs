@@ -92,6 +92,7 @@
             btnAdd.TabIndex = 4;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnUpdate
             // 
@@ -127,6 +128,7 @@
             cbAccount.Name = "cbAccount";
             cbAccount.Size = new Size(216, 33);
             cbAccount.TabIndex = 8;
+            cbAccount.SelectedIndexChanged += cbAccount_SelectedIndexChanged;
             // 
             // cbConcert
             // 
@@ -151,6 +153,8 @@
             dgvTickets.RowHeadersWidth = 62;
             dgvTickets.Size = new Size(1048, 280);
             dgvTickets.TabIndex = 12;
+            dgvTickets.CellContentClick += dgvTickets_CellClick;
+            dgvTickets.CellContentDoubleClick += dgvTickets_CellClick;
             // 
             // txtTicketNumber
             // 
@@ -215,6 +219,7 @@
             Controls.Add(lblAccount);
             Name = "FormTicket";
             Text = "FormTicket";
+            Load += FormTicket_Load;
             ((System.ComponentModel.ISupportInitialize)dgvTickets).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -14,8 +14,8 @@ namespace ConcertTicketing.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // ⚙️ Ganti koneksi sesuai database PostgreSQL kamu
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=db_vb2_concert_ticketing;Username=postgres;Password=test");
+            //connection db
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=db_vb2_concert_ticketing;Username=postgres;Password=root");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
