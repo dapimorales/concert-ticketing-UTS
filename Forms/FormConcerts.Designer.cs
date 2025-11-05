@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConcerts));
             lblName = new Label();
             lblPerformer = new Label();
             lblVanue = new Label();
@@ -51,101 +52,116 @@
             // lblName
             // 
             lblName.AutoSize = true;
+            lblName.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblName.Location = new Point(138, 37);
             lblName.Name = "lblName";
-            lblName.Size = new Size(127, 25);
+            lblName.Size = new Size(159, 21);
             lblName.TabIndex = 0;
-            lblName.Text = "Nama Konser :";
+            lblName.Text = "Nama Konser    :";
             // 
             // lblPerformer
             // 
             lblPerformer.AutoSize = true;
-            lblPerformer.Location = new Point(146, 91);
+            lblPerformer.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPerformer.Location = new Point(138, 87);
             lblPerformer.Name = "lblPerformer";
-            lblPerformer.Size = new Size(99, 25);
+            lblPerformer.Size = new Size(158, 21);
             lblPerformer.TabIndex = 1;
-            lblPerformer.Text = "Performer :";
+            lblPerformer.Text = "Performer       :";
             // 
             // lblVanue
             // 
             lblVanue.AutoSize = true;
-            lblVanue.Location = new Point(164, 141);
+            lblVanue.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblVanue.Location = new Point(138, 138);
             lblVanue.Name = "lblVanue";
-            lblVanue.Size = new Size(69, 25);
+            lblVanue.Size = new Size(158, 21);
             lblVanue.TabIndex = 2;
-            lblVanue.Text = "Vanue :";
+            lblVanue.Text = "Venue                 :";
+            lblVanue.Click += lblVanue_Click;
             // 
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(138, 197);
+            lblDate.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDate.Location = new Point(138, 192);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(82, 25);
+            lblDate.Size = new Size(158, 21);
             lblDate.TabIndex = 3;
-            lblDate.Text = "Tanggal :";
+            lblDate.Text = "Tanggal             :";
             // 
             // lblPrice
             // 
             lblPrice.AutoSize = true;
-            lblPrice.Location = new Point(138, 248);
+            lblPrice.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPrice.Location = new Point(138, 247);
             lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(69, 25);
+            lblPrice.Size = new Size(156, 21);
             lblPrice.TabIndex = 4;
-            lblPrice.Text = "Harga :";
+            lblPrice.Text = "Harga                :";
+            lblPrice.Click += lblPrice_Click;
             // 
             // lblCapacity
             // 
             lblCapacity.AutoSize = true;
-            lblCapacity.Location = new Point(138, 307);
+            lblCapacity.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCapacity.Location = new Point(138, 301);
             lblCapacity.Name = "lblCapacity";
-            lblCapacity.Size = new Size(95, 25);
+            lblCapacity.Size = new Size(156, 21);
             lblCapacity.TabIndex = 5;
-            lblCapacity.Text = "Kapasitas :";
+            lblCapacity.Text = "Kapasitas         :";
             // 
             // txtConcertName
             // 
+            txtConcertName.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtConcertName.Location = new Point(329, 37);
             txtConcertName.Name = "txtConcertName";
-            txtConcertName.Size = new Size(254, 31);
+            txtConcertName.Size = new Size(254, 29);
             txtConcertName.TabIndex = 6;
             // 
             // txtPerformer
             // 
-            txtPerformer.Location = new Point(329, 95);
+            txtPerformer.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPerformer.Location = new Point(329, 87);
             txtPerformer.Name = "txtPerformer";
-            txtPerformer.Size = new Size(254, 31);
+            txtPerformer.Size = new Size(254, 29);
             txtPerformer.TabIndex = 7;
             // 
             // txtVenue
             // 
+            txtVenue.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtVenue.Location = new Point(329, 141);
             txtVenue.Name = "txtVenue";
-            txtVenue.Size = new Size(254, 31);
+            txtVenue.Size = new Size(254, 29);
             txtVenue.TabIndex = 8;
             // 
             // txtDate
             // 
-            txtDate.Location = new Point(322, 197);
+            txtDate.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDate.Location = new Point(328, 197);
             txtDate.Name = "txtDate";
-            txtDate.Size = new Size(254, 31);
+            txtDate.Size = new Size(254, 29);
             txtDate.TabIndex = 9;
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(314, 248);
+            txtPrice.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPrice.Location = new Point(329, 244);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(264, 31);
+            txtPrice.Size = new Size(254, 29);
             txtPrice.TabIndex = 10;
             // 
             // txtCapacity
             // 
-            txtCapacity.Location = new Point(309, 304);
+            txtCapacity.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCapacity.Location = new Point(328, 304);
             txtCapacity.Name = "txtCapacity";
-            txtCapacity.Size = new Size(274, 31);
+            txtCapacity.Size = new Size(255, 29);
             txtCapacity.TabIndex = 11;
             // 
             // btnAdd
             // 
+            btnAdd.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAdd.Location = new Point(163, 368);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(112, 34);
@@ -156,7 +172,8 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(355, 368);
+            btnUpdate.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnUpdate.Location = new Point(321, 368);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(112, 34);
             btnUpdate.TabIndex = 13;
@@ -166,7 +183,8 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(544, 368);
+            btnDelete.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDelete.Location = new Point(687, 368);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(112, 34);
             btnDelete.TabIndex = 14;
@@ -176,7 +194,8 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(714, 368);
+            btnClear.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClear.Location = new Point(847, 368);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(112, 34);
             btnClear.TabIndex = 15;
@@ -186,18 +205,21 @@
             // 
             // dgvConcerts
             // 
+            dgvConcerts.BackgroundColor = Color.LemonChiffon;
             dgvConcerts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConcerts.Location = new Point(-1, 408);
             dgvConcerts.Name = "dgvConcerts";
             dgvConcerts.RowHeadersWidth = 62;
-            dgvConcerts.Size = new Size(1002, 258);
+            dgvConcerts.Size = new Size(1103, 258);
             dgvConcerts.TabIndex = 16;
             // 
             // FormConcerts
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(998, 665);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1093, 584);
             Controls.Add(dgvConcerts);
             Controls.Add(btnClear);
             Controls.Add(btnDelete);

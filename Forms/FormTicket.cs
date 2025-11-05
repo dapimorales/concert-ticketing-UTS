@@ -222,7 +222,17 @@ namespace concert_ticketing.Forms
 
         private void cbAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
+        }
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSeat_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
