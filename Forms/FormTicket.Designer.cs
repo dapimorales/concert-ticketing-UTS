@@ -109,7 +109,6 @@
             btnUpdate.TabIndex = 5;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
-            //btnUpdate.Click += btnUpdate_Click_1;
             // 
             // btnDelete
             // 
@@ -163,11 +162,11 @@
             // 
             // dgvTickets
             // 
+            dgvTickets.BackgroundColor = Color.LemonChiffon;
             dgvTickets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTickets.Location = new Point(0, 469);
             dgvTickets.Name = "dgvTickets";
             dgvTickets.RowHeadersWidth = 62;
-            dgvTickets.Size = new Size(1107, 280);
             dgvTickets.Size = new Size(1229, 280);
             dgvTickets.TabIndex = 12;
             dgvTickets.CellClick += dgvTickets_CellClick;
@@ -223,7 +222,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1093, 584);
             ClientSize = new Size(1221, 750);
             Controls.Add(dtpPurchaseDate);
             Controls.Add(lblPurchaseDate);
