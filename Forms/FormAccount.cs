@@ -81,17 +81,37 @@ namespace concert_ticketing.Forms
         }
 
         // 🔹 Tambah akun
+        // 🔹 Tambah akun
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
+                // 1. VALIDASI WAJIB ISI (Sudah ada, tapi perlu dicek semua field)
                 if (string.IsNullOrWhiteSpace(txtFullName.Text) ||
-                    string.IsNullOrWhiteSpace(txtEmail.Text))
+                    string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                    string.IsNullOrWhiteSpace(txtPhoneNumber.Text) || 
+                    string.IsNullOrWhiteSpace(txtAddress.Text))       
                 {
-                    MessageBox.Show("Nama dan Email wajib diisi!");
+                    MessageBox.Show("Semua kolom harus diisi!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                // --- 2. VALIDASI NOMOR HP (Harus Angka) ---
+                if (!long.TryParse(txtPhoneNumber.Text, out _))
+                {
+                    MessageBox.Show("Nomor HP hanya boleh diisi dengan angka.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // --- 3. VALIDASI EMAIL (@gmail.com) ---
+                string email = txtEmail.Text.Trim().ToLower();
+                if (!email.Contains("@") || !email.EndsWith("@gmail.com"))
+                {
+                    MessageBox.Show("Email harus valid dan menggunakan domain @gmail.com.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Jika semua validasi lolos, lanjutkan proses Add
                 var account = new Account
                 {
                     FullName = txtFullName.Text.Trim(),
@@ -122,6 +142,32 @@ namespace concert_ticketing.Forms
                     return;
                 }
 
+                // --- 1. VALIDASI WAJIB ISI ---
+                if (string.IsNullOrWhiteSpace(txtFullName.Text) ||
+                    string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                    string.IsNullOrWhiteSpace(txtPhoneNumber.Text) ||
+                    string.IsNullOrWhiteSpace(txtAddress.Text))
+                {
+                    MessageBox.Show("Semua kolom harus diisi!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // --- 2. VALIDASI NOMOR HP 
+                if (!long.TryParse(txtPhoneNumber.Text, out _))
+                {
+                    MessageBox.Show("Nomor HP hanya boleh diisi dengan angka.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // --- 3. VALIDASI EMAIL 
+                string email = txtEmail.Text.Trim().ToLower();
+                if (!email.Contains("@") || !email.EndsWith("@gmail.com"))
+                {
+                    MessageBox.Show("Email harus valid dan menggunakan domain @gmail.com.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Jika semua validasi lolos, lanjutkan proses Update
                 var account = new Account
                 {
                     Id = selectedAccountId.Value,
@@ -132,7 +178,7 @@ namespace concert_ticketing.Forms
                 };
 
                 _accountService.Update(account);
-                MessageBox.Show("✅ Data akun berhasil diperbarui!");
+                MessageBox.Show(" Data akun berhasil diperbarui!");
                 LoadAccounts();
                 ClearForm();
             }

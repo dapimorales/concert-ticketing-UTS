@@ -75,7 +75,7 @@ namespace concert_ticketing.Forms
                 txtConcertName.Text = selectedConcert.ConcertName;
                 txtPerformer.Text = selectedConcert.Performer;
                 txtVenue.Text = selectedConcert.Venue;
-                txtDate.Text = selectedConcert.ConcertDate.ToString("yyyy-MM-dd");
+                dtpTanggal.Value = selectedConcert.ConcertDate;
                 txtPrice.Text = selectedConcert.TicketPrice.ToString();
                 txtCapacity.Text = selectedConcert.Capacity.ToString();
             }
@@ -86,20 +86,45 @@ namespace concert_ticketing.Forms
         {
             try
             {
-                var parsedDate = DateTime.ParseExact(
-                    txtDate.Text,
-                    "dd/MM/yyyy",
-                    System.Globalization.CultureInfo.InvariantCulture
-                );
+                // 1. VALIDASI NOT NULL (Semua kolom wajib diisi)
+                if (string.IsNullOrWhiteSpace(txtConcertName.Text) ||
+                    string.IsNullOrWhiteSpace(txtPerformer.Text) ||
+                    string.IsNullOrWhiteSpace(txtVenue.Text) ||
+                    string.IsNullOrWhiteSpace(txtPrice.Text) ||
+                    string.IsNullOrWhiteSpace(txtCapacity.Text))
+                {
+                    MessageBox.Show("Semua kolom harus diisi!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 2. VALIDASI HANYA STRING (TIDAK BOLEH ADA ANGKA)
+                if (txtConcertName.Text.Any(char.IsDigit) ||
+                    txtPerformer.Text.Any(char.IsDigit) ||
+                    txtVenue.Text.Any(char.IsDigit))
+                {
+                    MessageBox.Show("Nama Konser, Performer, dan Venue tidak boleh mengandung angka!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 3. VALIDASI NUMERIK AMAN (Harga dan Kapasitas)
+                if (!decimal.TryParse(txtPrice.Text, out decimal ticketPrice) ||
+                    !int.TryParse(txtCapacity.Text, out int capacity))
+                {
+                    MessageBox.Show("Harga Tiket dan Kapasitas harus berupa angka yang valid!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                DateTime concertDate = dtpTanggal.Value.ToUniversalTime();
 
                 var concert = new Concert
                 {
                     ConcertName = txtConcertName.Text.Trim(),
                     Performer = txtPerformer.Text.Trim(),
                     Venue = txtVenue.Text.Trim(),
-                    ConcertDate = DateTime.SpecifyKind(parsedDate, DateTimeKind.Utc),
-                    TicketPrice = decimal.Parse(txtPrice.Text),
-                    Capacity = int.Parse(txtCapacity.Text)
+                    ConcertDate = concertDate,
+                    TicketPrice = ticketPrice, // Gunakan variabel yang sudah di-parse
+                    Capacity = capacity        // Gunakan variabel yang sudah di-parse
                 };
 
                 _concertService.Add(concert);
@@ -127,19 +152,49 @@ namespace concert_ticketing.Forms
 
             try
             {
-                // Membuat objek BARU yang berisi data form (ini OK, karena Service akan me-replace datanya)
+                // 1. VALIDASI NOT NULL (Semua kolom wajib diisi)
+                if (string.IsNullOrWhiteSpace(txtConcertName.Text) ||
+                    string.IsNullOrWhiteSpace(txtPerformer.Text) ||
+                    string.IsNullOrWhiteSpace(txtVenue.Text) ||
+                    string.IsNullOrWhiteSpace(txtPrice.Text) ||
+                    string.IsNullOrWhiteSpace(txtCapacity.Text))
+                {
+                    MessageBox.Show("Semua kolom harus diisi!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 2. VALIDASI HANYA STRING (TIDAK BOLEH ADA ANGKA)
+                if (txtConcertName.Text.Any(char.IsDigit) ||
+                    txtPerformer.Text.Any(char.IsDigit) ||
+                    txtVenue.Text.Any(char.IsDigit))
+                {
+                    MessageBox.Show("Nama Konser, Performer, dan Venue tidak boleh mengandung angka!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 3. VALIDASI NUMERIK AMAN (Harga dan Kapasitas)
+                if (!decimal.TryParse(txtPrice.Text, out decimal ticketPrice) ||
+                    !int.TryParse(txtCapacity.Text, out int capacity))
+                {
+                    MessageBox.Show("Harga Tiket dan Kapasitas harus berupa angka yang valid!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                DateTime concertDate = dtpTanggal.Value.ToUniversalTime();
+
+                // Membuat objek BARU untuk dikirim ke service Update
                 var concert = new Concert
                 {
                     Id = selectedConcertId.Value,
                     ConcertName = txtConcertName.Text.Trim(),
                     Performer = txtPerformer.Text.Trim(),
                     Venue = txtVenue.Text.Trim(),
-                    ConcertDate = DateTime.Parse(txtDate.Text),
-                    TicketPrice = decimal.Parse(txtPrice.Text),
-                    Capacity = int.Parse(txtCapacity.Text)
+                    ConcertDate = concertDate,
+                    TicketPrice = ticketPrice,
+                    Capacity = capacity
                 };
 
-                // Memanggil service. Service akan menemukan entitas lama dan meng-overwrite propertinya.
                 _concertService.Update(concert);
 
                 MessageBox.Show("Data konser berhasil diperbarui!");
@@ -194,7 +249,7 @@ namespace concert_ticketing.Forms
             txtConcertName.Clear();
             txtPerformer.Clear();
             txtVenue.Clear();
-            txtDate.Clear();
+            dtpTanggal.Value = DateTime.Today;
             txtPrice.Clear();
             txtCapacity.Clear();
             selectedConcertId = null;

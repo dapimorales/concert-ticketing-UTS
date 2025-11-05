@@ -38,7 +38,6 @@
             txtConcertName = new TextBox();
             txtPerformer = new TextBox();
             txtVenue = new TextBox();
-            txtDate = new TextBox();
             txtPrice = new TextBox();
             txtCapacity = new TextBox();
             btnAdd = new Button();
@@ -46,6 +45,7 @@
             btnDelete = new Button();
             btnClear = new Button();
             dgvConcerts = new DataGridView();
+            dtpTanggal = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvConcerts).BeginInit();
             SuspendLayout();
             // 
@@ -135,14 +135,6 @@
             txtVenue.Size = new Size(254, 29);
             txtVenue.TabIndex = 8;
             // 
-            // txtDate
-            // 
-            txtDate.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDate.Location = new Point(328, 197);
-            txtDate.Name = "txtDate";
-            txtDate.Size = new Size(254, 29);
-            txtDate.TabIndex = 9;
-            // 
             // txtPrice
             // 
             txtPrice.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -213,6 +205,13 @@
             dgvConcerts.Size = new Size(1103, 258);
             dgvConcerts.TabIndex = 16;
             // 
+            // dtpTanggal
+            // 
+            dtpTanggal.Location = new Point(327, 192);
+            dtpTanggal.Name = "dtpTanggal";
+            dtpTanggal.Size = new Size(288, 31);
+            dtpTanggal.TabIndex = 17;
+            // 
             // FormConcerts
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -220,6 +219,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1093, 584);
+            Controls.Add(dtpTanggal);
             Controls.Add(dgvConcerts);
             Controls.Add(btnClear);
             Controls.Add(btnDelete);
@@ -227,7 +227,6 @@
             Controls.Add(btnAdd);
             Controls.Add(txtCapacity);
             Controls.Add(txtPrice);
-            Controls.Add(txtDate);
             Controls.Add(txtVenue);
             Controls.Add(txtPerformer);
             Controls.Add(txtConcertName);
@@ -255,7 +254,6 @@
         private TextBox txtConcertName;
         private TextBox txtPerformer;
         private TextBox txtVenue;
-        private TextBox txtDate;
         private TextBox txtPrice;
         private TextBox txtCapacity;
         private Button btnAdd;
@@ -263,5 +261,6 @@
         private Button btnDelete;
         private Button btnClear;
         private DataGridView dgvConcerts;
+        private DateTimePicker dtpTanggal;
     }
 }

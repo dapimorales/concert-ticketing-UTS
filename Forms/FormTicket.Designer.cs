@@ -88,7 +88,6 @@
             lblSeat.Size = new Size(159, 21);
             lblSeat.TabIndex = 3;
             lblSeat.Text = "Seat                    :";
-            lblSeat.Click += lblSeat_Click;
             // 
             // btnAdd
             // 
@@ -110,7 +109,7 @@
             btnUpdate.TabIndex = 5;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click_1;
+            //btnUpdate.Click += btnUpdate_Click_1;
             // 
             // btnDelete
             // 

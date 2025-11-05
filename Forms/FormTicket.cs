@@ -45,12 +45,16 @@ namespace concert_ticketing.Forms
             {
                 try
                 {
+                    // 1. Ambil ID Konser yang dipilih
                     int concertId = Convert.ToInt32(cbConcert.SelectedValue);
+
+                    // 2. Cari data Konser berdasarkan ID tersebut dari DbContext
                     var selectedConcert = _context.Concerts.Find(concertId);
 
                     if (selectedConcert != null)
                     {
-                        // Set Harga Tiket ke TextBox PricePaid
+                        // 3. Set Harga Tiket ke TextBox PricePaid
+                        // Gunakan properti TicketPrice (sesuai nama kolom di model Concert)
                         txtPricePaid.Text = selectedConcert.TicketPrice.ToString();
                     }
                     else
@@ -60,13 +64,23 @@ namespace concert_ticketing.Forms
                 }
                 catch (Exception)
                 {
+                    // Jika ada error (misalnya saat konversi ID), kosongkan harga
                     txtPricePaid.Clear();
                 }
             }
             else
             {
+                // Kosongkan harga jika ComboBox tidak memiliki pilihan valid
                 txtPricePaid.Clear();
             }
+        }
+
+        private void FormTicket_Activated(object sender, EventArgs e)
+        {
+            // Memaksa form memuat ulang data akun dan konser terbaru
+            LoadComboboxes();
+            // Memaksa grid tiket memuat ulang data
+            LoadTickets();
         }
 
         private void LoadTickets()
@@ -272,10 +286,6 @@ namespace concert_ticketing.Forms
 
         }
 
-        private void btnUpdate_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void lblSeat_Click(object sender, EventArgs e)
         {
