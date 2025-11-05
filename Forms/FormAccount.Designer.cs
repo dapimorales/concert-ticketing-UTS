@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAccount));
             lblName = new Label();
             txtFullName = new TextBox();
             btnAdd = new Button();
@@ -47,21 +48,25 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(85, 28);
+            lblName.BackColor = SystemColors.ControlLightLight;
+            lblName.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblName.Location = new Point(80, 32);
             lblName.Name = "lblName";
-            lblName.Size = new Size(68, 25);
+            lblName.Size = new Size(99, 21);
             lblName.TabIndex = 0;
-            lblName.Text = "Nama :";
+            lblName.Text = "Nama       :";
             // 
             // txtFullName
             // 
-            txtFullName.Location = new Point(194, 28);
+            txtFullName.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtFullName.Location = new Point(201, 28);
             txtFullName.Name = "txtFullName";
-            txtFullName.Size = new Size(218, 31);
+            txtFullName.Size = new Size(218, 29);
             txtFullName.TabIndex = 1;
             // 
             // btnAdd
             // 
+            btnAdd.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAdd.Location = new Point(104, 326);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(112, 34);
@@ -73,38 +78,45 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(85, 101);
+            lblEmail.BackColor = SystemColors.ControlLightLight;
+            lblEmail.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEmail.Location = new Point(80, 108);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(63, 25);
+            lblEmail.Size = new Size(99, 21);
             lblEmail.TabIndex = 3;
-            lblEmail.Text = "Email :";
+            lblEmail.Text = "Email      :";
             // 
             // lblPhone
             // 
             lblPhone.AutoSize = true;
-            lblPhone.Location = new Point(85, 174);
+            lblPhone.BackColor = SystemColors.ControlLightLight;
+            lblPhone.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPhone.Location = new Point(81, 177);
             lblPhone.Name = "lblPhone";
-            lblPhone.Size = new Size(71, 25);
+            lblPhone.Size = new Size(100, 21);
             lblPhone.TabIndex = 4;
-            lblPhone.Text = "Phone :";
+            lblPhone.Text = "Phone     :";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(194, 110);
+            txtEmail.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtEmail.Location = new Point(201, 104);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(218, 31);
+            txtEmail.Size = new Size(218, 29);
             txtEmail.TabIndex = 5;
             // 
             // txtPhoneNumber
             // 
-            txtPhoneNumber.Location = new Point(194, 174);
+            txtPhoneNumber.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPhoneNumber.Location = new Point(202, 174);
             txtPhoneNumber.Name = "txtPhoneNumber";
-            txtPhoneNumber.Size = new Size(218, 31);
+            txtPhoneNumber.Size = new Size(218, 29);
             txtPhoneNumber.TabIndex = 6;
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(347, 326);
+            btnUpdate.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnUpdate.Location = new Point(269, 326);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(112, 34);
             btnUpdate.TabIndex = 7;
@@ -114,7 +126,8 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(548, 326);
+            btnDelete.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDelete.Location = new Point(694, 326);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(112, 34);
             btnDelete.TabIndex = 8;
@@ -124,7 +137,8 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(775, 326);
+            btnClear.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClear.Location = new Point(864, 327);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(112, 34);
             btnClear.TabIndex = 9;
@@ -134,6 +148,7 @@
             // 
             // dgvAccounts
             // 
+            dgvAccounts.BackgroundColor = Color.LemonChiffon;
             dgvAccounts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAccounts.Location = new Point(-12, 394);
             dgvAccounts.Name = "dgvAccounts";
@@ -144,25 +159,31 @@
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(194, 251);
+            txtAddress.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAddress.Location = new Point(204, 241);
             txtAddress.Name = "txtAddress";
-            txtAddress.Size = new Size(218, 31);
+            txtAddress.Size = new Size(218, 29);
             txtAddress.TabIndex = 12;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(85, 251);
+            label1.BackColor = SystemColors.ControlLightLight;
+            label1.Font = new Font("Stencil", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(77, 246);
             label1.Name = "label1";
-            label1.Size = new Size(86, 25);
+            label1.Size = new Size(110, 21);
             label1.TabIndex = 11;
-            label1.Text = "Address :";
+            label1.Text = "Address  : ";
+            label1.Click += label1_Click;
             // 
             // FormAccount
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(928, 647);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1093, 584);
             Controls.Add(txtAddress);
             Controls.Add(label1);
             Controls.Add(dgvAccounts);

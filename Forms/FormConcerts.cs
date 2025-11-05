@@ -199,5 +199,15 @@ namespace concert_ticketing.Forms
             txtCapacity.Clear();
             selectedConcertId = null;
         }
+
+        private void lblVanue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPrice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

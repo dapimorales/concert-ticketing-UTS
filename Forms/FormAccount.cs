@@ -184,5 +184,10 @@ namespace concert_ticketing.Forms
             txtAddress.Clear();
             selectedAccountId = null;
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
