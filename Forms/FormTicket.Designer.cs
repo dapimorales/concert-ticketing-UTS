@@ -102,6 +102,7 @@
             btnUpdate.TabIndex = 5;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click_1;
             // 
             // btnDelete
             // 
@@ -111,6 +112,7 @@
             btnDelete.TabIndex = 6;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnClear
             // 
@@ -120,6 +122,7 @@
             btnClear.TabIndex = 7;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // cbAccount
             // 
@@ -137,6 +140,7 @@
             cbConcert.Name = "cbConcert";
             cbConcert.Size = new Size(216, 33);
             cbConcert.TabIndex = 9;
+            cbConcert.SelectedIndexChanged += cbConcert_SelectedIndexChanged;
             // 
             // txtSeatNumber
             // 
@@ -151,9 +155,9 @@
             dgvTickets.Location = new Point(0, 469);
             dgvTickets.Name = "dgvTickets";
             dgvTickets.RowHeadersWidth = 62;
-            dgvTickets.Size = new Size(1048, 280);
+            dgvTickets.Size = new Size(1229, 280);
             dgvTickets.TabIndex = 12;
-            dgvTickets.CellContentClick += dgvTickets_CellClick;
+            dgvTickets.CellClick += dgvTickets_CellClick;
             dgvTickets.CellContentDoubleClick += dgvTickets_CellClick;
             // 
             // txtTicketNumber
@@ -199,7 +203,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1051, 750);
+            ClientSize = new Size(1221, 750);
             Controls.Add(dtpPurchaseDate);
             Controls.Add(lblPurchaseDate);
             Controls.Add(txtPricePaid);

@@ -27,7 +27,7 @@ namespace concert_ticketing.Forms
 
         private void LoadComboboxes()
         {
-            // Load daftar akun (jika hanya user, tampilkan semua user)
+            // Load daftar akun 
             cbAccount.DataSource = _context.Accounts.ToList();
             cbAccount.DisplayMember = "Username";
             cbAccount.ValueMember = "Id";
@@ -36,6 +36,37 @@ namespace concert_ticketing.Forms
             cbConcert.DataSource = _context.Concerts.ToList();
             cbConcert.DisplayMember = "ConcertName";
             cbConcert.ValueMember = "Id";
+        }
+
+        private void cbConcert_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Cek apakah ada item yang benar-benar dipilih dan bukan event saat loading data
+            if (cbConcert.SelectedValue != null && cbConcert.SelectedIndex != -1)
+            {
+                try
+                {
+                    int concertId = Convert.ToInt32(cbConcert.SelectedValue);
+                    var selectedConcert = _context.Concerts.Find(concertId);
+
+                    if (selectedConcert != null)
+                    {
+                        // Set Harga Tiket ke TextBox PricePaid
+                        txtPricePaid.Text = selectedConcert.TicketPrice.ToString();
+                    }
+                    else
+                    {
+                        txtPricePaid.Clear();
+                    }
+                }
+                catch (Exception)
+                {
+                    txtPricePaid.Clear();
+                }
+            }
+            else
+            {
+                txtPricePaid.Clear();
+            }
         }
 
         private void LoadTickets()
@@ -58,7 +89,7 @@ namespace concert_ticketing.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // --- VALIDASI INPUT & PARSING AMAN (Sudah Benar) ---
+            // validasi input
             if (string.IsNullOrWhiteSpace(txtTicketNumber.Text) ||
                 string.IsNullOrWhiteSpace(txtSeatNumber.Text) ||
                 cbAccount.SelectedValue == null ||
@@ -73,11 +104,10 @@ namespace concert_ticketing.Forms
                 MessageBox.Show("Harga Bayar harus berupa angka yang valid.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // --- END VALIDASI ---
 
             try
             {
-                // 🚨 PERBAIKAN DATE TIME: Konversi Local Time menjadi UTC
+                //  Konversi Local Time menjadi UTC
                 DateTime purchaseDateLocal = dtpPurchaseDate.Value;
                 DateTime purchaseDateUtc = purchaseDateLocal.ToUniversalTime();
 
@@ -101,7 +131,7 @@ namespace concert_ticketing.Forms
             }
             catch (Exception ex)
             {
-                // Blok catch diperbaiki agar menampilkan error detail (yang sudah benar)
+                // Blok catch 
                 string errorMessage = "Gagal menambahkan tiket: " + ex.Message;
                 if (ex.InnerException != null)
                 {
@@ -115,7 +145,7 @@ namespace concert_ticketing.Forms
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click_1(object sender, EventArgs e)
         {
             if (dgvTickets.CurrentRow == null)
             {
@@ -123,7 +153,7 @@ namespace concert_ticketing.Forms
                 return;
             }
 
-            // --- VALIDASI INPUT & PARSING AMAN (Sudah Benar) ---
+            // validasi input
             if (cbAccount.SelectedValue == null || cbConcert.SelectedValue == null)
             {
                 MessageBox.Show("Akun dan Konser harus dipilih.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -135,16 +165,17 @@ namespace concert_ticketing.Forms
                 MessageBox.Show("Harga Bayar harus berupa angka yang valid.", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // --- END VALIDASI ---
+         
 
             try
             {
+                // Pastikan ID diambil dengan aman
                 int id = (int)dgvTickets.CurrentRow.Cells["Id"].Value;
                 var ticket = _context.Tickets.Find(id);
 
                 if (ticket != null)
                 {
-                    // 🚨 PERBAIKAN DATE TIME: Konversi Local Time menjadi UTC
+                    // konfersi lokal jadi utc
                     DateTime purchaseDateLocal = dtpPurchaseDate.Value;
                     DateTime purchaseDateUtc = purchaseDateLocal.ToUniversalTime();
 
@@ -152,7 +183,7 @@ namespace concert_ticketing.Forms
                     ticket.TicketNumber = txtTicketNumber.Text;
                     ticket.SeatNumber = txtSeatNumber.Text;
                     ticket.PricePaid = pricePaid;
-                    ticket.PurchaseDate = purchaseDateUtc; // Digunakan versi UTC
+                    ticket.PurchaseDate = purchaseDateUtc; // <-- Sudah di-fix
                     ticket.AccountId = Convert.ToInt32(cbAccount.SelectedValue);
                     ticket.ConcertId = Convert.ToInt32(cbConcert.SelectedValue);
 
@@ -164,6 +195,7 @@ namespace concert_ticketing.Forms
             }
             catch (Exception ex)
             {
+                // Lebih baik menangani error ID retrieval juga di sini
                 MessageBox.Show($"Gagal mengupdate tiket: {ex.Message}");
             }
         }
@@ -176,16 +208,31 @@ namespace concert_ticketing.Forms
                 return;
             }
 
-            int id = (int)dgvTickets.CurrentRow.Cells["Id"].Value;
-            var ticket = _context.Tickets.Find(id);
-
-            if (ticket != null)
+            try
             {
-                _context.Tickets.Remove(ticket);
-                _context.SaveChanges();
-                MessageBox.Show("Ticket deleted successfully!");
-                ClearForm();
-                LoadTickets();
+                // Pengambilan ID diletakkan di dalam try block
+                int id = (int)dgvTickets.CurrentRow.Cells["Id"].Value;
+
+                var ticket = _context.Tickets.Find(id);
+
+                if (ticket != null)
+                {
+                    _context.Tickets.Remove(ticket);
+                    _context.SaveChanges();
+
+                    MessageBox.Show("Ticket deleted successfully!");
+                    ClearForm();
+                    LoadTickets();
+                }
+                else
+                {
+                    MessageBox.Show("Tiket tidak ditemukan di database.", "Error Deleting", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Tangkap exception (misalnya Foreign Key Constraint yang mencegah penghapusan)
+                MessageBox.Show($"Gagal menghapus tiket: {ex.Message}", "Error Deleting Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -222,7 +269,12 @@ namespace concert_ticketing.Forms
 
         private void cbAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
+
+        //private void btnUpdate_Click_1(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }
